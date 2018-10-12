@@ -56,10 +56,6 @@ def init_postgres(url):
     global DB
 
     db_name = url.path.strip("/")
-    log.info(str(url))
-    log.info(str(url.path))
-    log.info(str(url.host))
-    log.info(str(url.password))
     DB.initialize(PostgresqlDatabase(
         database=db_name,
         user=url.user or None,
