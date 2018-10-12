@@ -40,7 +40,10 @@ def init_mysql(url):
     global DB
 
     db_name = url.path.strip("/")
-
+    log.info(url)
+    log.info(url.path)
+    log.info(url.host)
+    log.info(url.password)
     DB.initialize(MySQLDatabase(
         database=db_name,
         user=url.user or '',
