@@ -40,7 +40,6 @@ def init_mysql(url):
     global DB
 
     db_name = url.path.strip("/")
-
     DB.initialize(MySQLDatabase(
         database=db_name,
         user=url.user or '',
@@ -57,7 +56,6 @@ def init_postgres(url):
     global DB
 
     db_name = url.path.strip("/")
-
     DB.initialize(PostgresqlDatabase(
         database=db_name,
         user=url.user or None,

@@ -30,6 +30,10 @@ DEFAULT_PORTS = {
 if __name__ == '__main__':
     args = sys.argv[1:]
 
+    with open(os.path.join("/run", "secrets", "postgres-passwd"), 'r') as pg_passwd_file:
+        pg_passwd = pg_passwd_file.read()
+        os.environ['DB'] = os.getenv('DB', '').replace("PASSWORD", pg_passwd)
+
     if not args or args[0].startswith('-'):
         db_url = parse_url(os.getenv('DB', ''))
         host = db_url.hostname
