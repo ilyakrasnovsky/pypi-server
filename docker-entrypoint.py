@@ -3,7 +3,6 @@ import socket
 import os
 import sys
 import logging
-import base64
 from time import sleep
 from distutils import spawn
 
@@ -33,8 +32,7 @@ if __name__ == '__main__':
 
     with open(os.path.join("/run", "secrets", "postgres-passwd"), 'r') as pg_passwd_file:
         pg_passwd = pg_passwd_file.read()
-        print (pg_passwd)
-        print (base64.b64decode(pg_passwd))
+        os.environ['DB'] = os.getenv('DB', '').replace("PASSWORD", pg_passwd)
 
     if not args or args[0].startswith('-'):
         db_url = parse_url(os.getenv('DB', ''))
