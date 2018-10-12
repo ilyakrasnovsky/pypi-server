@@ -3,6 +3,7 @@ import socket
 import os
 import sys
 import logging
+import base64
 from time import sleep
 from distutils import spawn
 
@@ -29,6 +30,10 @@ DEFAULT_PORTS = {
 
 if __name__ == '__main__':
     args = sys.argv[1:]
+
+    with open(os.path.join("/run", "secrets", "postgres-passwd"), 'r') as pg_passwd_file:
+        pg_passwd = base64.b64decode(pg_passwd_file.read())
+        print (pg_passwd)
 
     if not args or args[0].startswith('-'):
         db_url = parse_url(os.getenv('DB', ''))
